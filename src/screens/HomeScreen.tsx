@@ -10,16 +10,21 @@ type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
 
 export function HomeScreen({navigation}: Props): React.JSX.Element {
   const [tarefas, setTarefas] = useState<Tarefa[]>([]);
-  const [novaTarefa, setNovaTarefa] = useState('');
+  const [novoTitulo, setNovoTitulo] = useState('');
+  const [novoTexto, setNovoTexto] = useState('');
 
   const adicionarTarefa = () => {
-    if (novaTarefa.trim()) {
+    if (novoTitulo.trim() && novoTexto.trim()) {
       setTarefas([...tarefas, {
         id: String(Date.now()),
-        texto: novaTarefa,
+        titulo: novoTitulo,
+        texto: novoTexto,
         concluida: false
       }]);
-      setNovaTarefa('');
+      setNovoTitulo('');
+      setNovoTexto('');
+    } else {
+      Alert.alert('Atenção', 'Por favor, preencha o título e o texto da tarefa.');
     }
   };
 
@@ -53,8 +58,10 @@ export function HomeScreen({navigation}: Props): React.JSX.Element {
       <Text style={styles.titulo}>Lista de Tarefas</Text>
       
       <TarefaInput
-        valor={novaTarefa}
-        onChangeText={setNovaTarefa}
+        valorTitulo={novoTitulo}
+        valorTexto={novoTexto}
+        onChangeTitulo={setNovoTitulo}
+        onChangeTexto={setNovoTexto}
         onSubmit={adicionarTarefa}
       />
 

@@ -13,6 +13,10 @@ export function DetalhesTarefa({route, navigation}: Props) {
       <Text style={styles.titulo}>Detalhes da Tarefa</Text>
       
       <View style={styles.card}>
+        <Text style={styles.label}>Título da Tarefa:</Text>
+        <Text style={styles.texto}>{tarefa.titulo}</Text>
+        
+
         <Text style={styles.label}>Texto da Tarefa:</Text>
         <Text style={styles.texto}>{tarefa.texto}</Text>
         

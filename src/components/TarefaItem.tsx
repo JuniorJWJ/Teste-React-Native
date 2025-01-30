@@ -11,7 +11,6 @@ type Props = {
 export function TarefaItem({tarefa, onToggle, onPress}: Props): React.JSX.Element {
   return (
     <TouchableOpacity 
-      // onPress={onPress}
       onPress={() => onToggle(tarefa.id)}
       style={styles.container}
     >
@@ -20,12 +19,20 @@ export function TarefaItem({tarefa, onToggle, onPress}: Props): React.JSX.Elemen
           styles.checkbox,
           tarefa.concluida && styles.checkboxConcluida
         ]} />
-        <Text style={[
-          styles.texto,
-          tarefa.concluida && styles.textoConcluido
-        ]}>
-          {tarefa.texto} 
-        </Text>
+        <View style={styles.conteudoContainer}>
+          <Text style={[
+            styles.titulo,
+            tarefa.concluida && styles.textoConcluido
+          ]}>
+            {tarefa.titulo}
+          </Text>
+          <Text style={[
+            styles.texto,
+            tarefa.concluida && styles.textoConcluido
+          ]}>
+            {tarefa.texto}
+          </Text>
+        </View>
         <Button title="Detalhes" onPress={onPress} />
       </View>
     </TouchableOpacity>
@@ -41,7 +48,6 @@ const styles = StyleSheet.create({
   },
   tarefaContainer: {
     flexDirection: 'row',
-    // alignItems: 'center',
     justifyContent: 'space-between',
   },
   checkbox: {
@@ -56,9 +62,19 @@ const styles = StyleSheet.create({
     backgroundColor: '#4CAF50',
     borderColor: '#4CAF50',
   },
-  texto: {
-    fontSize: 16,
+  conteudoContainer: {
+    flex: 1,
+    marginRight: 10,
+  },
+  titulo: {
+    fontSize: 18,
+    fontWeight: 'bold',
     color: '#333',
+    marginBottom: 4,
+  },
+  texto: {
+    fontSize: 14,
+    color: '#666',
   },
   textoConcluido: {
     textDecorationLine: 'line-through',
