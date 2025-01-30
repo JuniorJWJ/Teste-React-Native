@@ -1,40 +1,66 @@
 import React from 'react';
-import {TouchableOpacity, Text, StyleSheet} from 'react-native';
+import {TouchableOpacity, Text, StyleSheet, View, Button} from 'react-native';
 import {Tarefa} from '../types/Tarefa';
 
-interface TarefaItemProps {
+type Props = {
   tarefa: Tarefa;
   onToggle: (id: string) => void;
-}
+  onPress: () => void;
+};
 
-export function TarefaItem({tarefa, onToggle}: TarefaItemProps) {
+export function TarefaItem({tarefa, onToggle, onPress}: Props): React.JSX.Element {
   return (
-    <TouchableOpacity
-      style={styles.tarefaItem}
-      onPress={() => onToggle(tarefa.id)}>
-      <Text style={[styles.tarefaTexto, tarefa.completa && styles.tarefaCompleta]}>
-        {tarefa.texto}
-      </Text>
+    <TouchableOpacity 
+      // onPress={onPress}
+      onPress={() => onToggle(tarefa.id)}
+      style={styles.container}
+    >
+      <View style={styles.tarefaContainer}>
+        <View style={[
+          styles.checkbox,
+          tarefa.concluida && styles.checkboxConcluida
+        ]} />
+        <Text style={[
+          styles.texto,
+          tarefa.concluida && styles.textoConcluido
+        ]}>
+          {tarefa.texto} 
+        </Text>
+        <Button title="Detalhes" onPress={onPress} />
+      </View>
     </TouchableOpacity>
   );
 }
 
 const styles = StyleSheet.create({
-  tarefaItem: {
-    backgroundColor: '#fff',
+  container: {
     padding: 15,
-    borderRadius: 5,
-    marginBottom: 10,
-    elevation: 2,
-    shadowColor: '#000',
-    shadowOffset: {width: 0, height: 2},
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
+    backgroundColor: '#f8f8f8',
+    borderRadius: 8,
+    marginVertical: 5,
   },
-  tarefaTexto: {
+  tarefaContainer: {
+    flexDirection: 'row',
+    // alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  checkbox: {
+    width: 20,
+    height: 20,
+    borderRadius: 10,
+    borderWidth: 2,
+    borderColor: '#666',
+    marginRight: 10,
+  },
+  checkboxConcluida: {
+    backgroundColor: '#4CAF50',
+    borderColor: '#4CAF50',
+  },
+  texto: {
     fontSize: 16,
+    color: '#333',
   },
-  tarefaCompleta: {
+  textoConcluido: {
     textDecorationLine: 'line-through',
     color: '#888',
   },
