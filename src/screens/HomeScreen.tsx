@@ -54,6 +54,12 @@ export function HomeScreen({navigation}: Props): React.JSX.Element {
     );
   };
 
+  const editarTarefa = (tarefaAtualizada: Tarefa) => {
+    setTarefas(tarefas.map(tarefa => 
+      tarefa.id === tarefaAtualizada.id ? tarefaAtualizada : tarefa
+    ));
+  };
+
   const styles = StyleSheet.create({
     container: {
       flex: 1,
@@ -94,6 +100,10 @@ export function HomeScreen({navigation}: Props): React.JSX.Element {
             onToggle={alternarTarefa}
             onPress={() => navigation.navigate('DetalhesTarefa', {tarefa: item})}
             onDelete={() => deletarTarefa(item.id)}
+            onEdit={() => navigation.navigate('EditarTarefa', {
+              tarefa: item,
+              onSave: editarTarefa
+            })}
           />
         )}
       />

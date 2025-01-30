@@ -5,4 +5,8 @@ export type RootStackParamList = {
   DetalhesTarefa: {
     tarefa: Tarefa;
   };
+  EditarTarefa: {
+    tarefa: Tarefa;
+    onSave: (tarefaAtualizada: Tarefa) => void;
+  };
 }; 

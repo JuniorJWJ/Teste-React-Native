@@ -14,13 +14,15 @@ type Props = {
   onToggle: (id: string) => void;
   onPress: () => void;
   onDelete: () => void;
+  onEdit: () => void;
 };
 
 export function TarefaItem({
   tarefa,
   onToggle,
   onPress,
-  onDelete
+  onDelete,
+  onEdit
 }: Props): React.JSX.Element {
   return (
     <View style={styles.container}>
@@ -53,6 +55,12 @@ export function TarefaItem({
           title="Detalhes" 
           onPress={onPress}
         />
+        <Pressable 
+          style={styles.botaoEditar}
+          onPress={onEdit}
+        >
+          <Text style={styles.botaoEditarTexto}>Editar</Text>
+        </Pressable>
         <Pressable 
           style={styles.botaoExcluir}
           onPress={onDelete}
@@ -120,6 +128,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   botaoExcluirTexto: {
+    color: '#fff',
+    fontWeight: 'bold',
+  },
+  botaoEditar: {
+    backgroundColor: '#ffa500',
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    borderRadius: 5,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  botaoEditarTexto: {
     color: '#fff',
     fontWeight: 'bold',
   },

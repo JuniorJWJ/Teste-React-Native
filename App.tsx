@@ -11,6 +11,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {HomeScreen} from './src/screens/HomeScreen';
 import {DetalhesTarefa} from './src/screens/DetalhesTarefa';
 import {RootStackParamList} from './src/types/navigation';
+import { EditarTarefaScreen } from './src/screens/EditarTarefaScreen';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -25,6 +26,11 @@ function App(): React.JSX.Element {
       >
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="DetalhesTarefa" component={DetalhesTarefa} />
+        <Stack.Screen 
+          name="EditarTarefa" 
+          component={EditarTarefaScreen}
+          options={{ title: 'Editar Tarefa' }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
