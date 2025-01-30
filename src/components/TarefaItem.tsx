@@ -1,20 +1,33 @@
 import React from 'react';
-import {TouchableOpacity, Text, StyleSheet, View, Button} from 'react-native';
-import {Tarefa} from '../types/Tarefa';
+import {
+  TouchableOpacity,
+  Text,
+  StyleSheet,
+  View,
+  Button,
+  Pressable
+} from 'react-native';
+import { Tarefa } from '../types/Tarefa';
 
 type Props = {
   tarefa: Tarefa;
   onToggle: (id: string) => void;
   onPress: () => void;
+  onDelete: () => void;
 };
 
-export function TarefaItem({tarefa, onToggle, onPress}: Props): React.JSX.Element {
+export function TarefaItem({
+  tarefa,
+  onToggle,
+  onPress,
+  onDelete
+}: Props): React.JSX.Element {
   return (
-    <TouchableOpacity 
-      onPress={() => onToggle(tarefa.id)}
-      style={styles.container}
-    >
-      <View style={styles.tarefaContainer}>
+    <View style={styles.container}>
+      <TouchableOpacity 
+        onPress={() => onToggle(tarefa.id)}
+        style={styles.tarefaContainer}
+      >
         <View style={[
           styles.checkbox,
           tarefa.concluida && styles.checkboxConcluida
@@ -33,9 +46,21 @@ export function TarefaItem({tarefa, onToggle, onPress}: Props): React.JSX.Elemen
             {tarefa.texto}
           </Text>
         </View>
-        <Button title="Detalhes" onPress={onPress} />
+      </TouchableOpacity>
+      
+      <View style={styles.botoesContainer}>
+        <Button 
+          title="Detalhes" 
+          onPress={onPress}
+        />
+        <Pressable 
+          style={styles.botaoExcluir}
+          onPress={onDelete}
+        >
+          <Text style={styles.botaoExcluirTexto}>Excluir</Text>
+        </Pressable>
       </View>
-    </TouchableOpacity>
+    </View>
   );
 }
 
@@ -79,5 +104,23 @@ const styles = StyleSheet.create({
   textoConcluido: {
     textDecorationLine: 'line-through',
     color: '#888',
+  },
+  botoesContainer: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    gap: 10,
+    marginTop: 8,
+  },
+  botaoExcluir: {
+    backgroundColor: '#ff4444',
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    borderRadius: 5,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  botaoExcluirTexto: {
+    color: '#fff',
+    fontWeight: 'bold',
   },
 }); 

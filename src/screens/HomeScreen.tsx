@@ -34,6 +34,26 @@ export function HomeScreen({navigation}: Props): React.JSX.Element {
     ));
   };
 
+  const deletarTarefa = (id: string) => {
+    Alert.alert(
+      'Confirmar exclusão',
+      'Tem certeza que deseja excluir esta tarefa?',
+      [
+        {
+          text: 'Cancelar',
+          style: 'cancel'
+        },
+        {
+          text: 'Excluir',
+          onPress: () => {
+            setTarefas(tarefas.filter(tarefa => tarefa.id !== id));
+          },
+          style: 'destructive'
+        }
+      ]
+    );
+  };
+
   const styles = StyleSheet.create({
     container: {
       flex: 1,
@@ -73,6 +93,7 @@ export function HomeScreen({navigation}: Props): React.JSX.Element {
             tarefa={item} 
             onToggle={alternarTarefa}
             onPress={() => navigation.navigate('DetalhesTarefa', {tarefa: item})}
+            onDelete={() => deletarTarefa(item.id)}
           />
         )}
       />
